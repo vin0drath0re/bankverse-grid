@@ -26,3 +26,11 @@ export interface User {
   email: string;
   avatar?: string;
 }
+
+export interface BudgetCategory {
+  id: string;
+  name: string;
+  allocated: number;
+  spent: number;
+  color: string;
+}

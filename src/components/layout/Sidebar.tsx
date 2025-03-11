@@ -11,7 +11,8 @@ import {
   Settings, 
   HelpCircle,
   LogOut,
-  Menu
+  Menu,
+  TrendingUp
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
