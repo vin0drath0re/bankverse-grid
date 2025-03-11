@@ -53,7 +53,7 @@ const Sidebar = ({ collapsed, toggleSidebar, currentPath }: SidebarProps) => {
     { icon: <LayoutDashboard size={20} />, label: 'Dashboard', to: '/' },
     { icon: <CreditCard size={20} />, label: 'Accounts', to: '/accounts' },
     { icon: <ArrowRightLeft size={20} />, label: 'Transactions', to: '/transactions' },
-    { icon: <PiggyBank size={20} />, label: 'Budgets', to: '/budgets' },
+    { icon: <TrendingUp size={20} />, label: 'Investments', to: '/investments' },
     { icon: <BarChart3 size={20} />, label: 'Analytics', to: '/analytics' },
     { icon: <BellRing size={20} />, label: 'Notifications', to: '/notifications' },
   ];

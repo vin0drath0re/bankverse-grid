@@ -1,4 +1,3 @@
-
 import { CreditCard, PlusCircle, ArrowRightLeft } from 'lucide-react';
 import { accounts } from '@/data/mockData';
 import { Button } from '@/components/ui/button';
@@ -9,18 +8,35 @@ import {
   TabsList,
   TabsTrigger,
 } from '@/components/ui/tabs';
+import TransferModal from '@/components/modals/TransferModal';
+import { toast } from "sonner";
 
 const Accounts = () => {
-  // Calculate total balance
+  const [showTransferModal, setShowTransferModal] = useState(false);
+  
+  const handleTransfer = (fromId: string, toId: string, amount: number) => {
+    const updatedAccounts = accounts.map(account => {
+      if (account.id === fromId) {
+        return { ...account, balance: account.balance - amount };
+      }
+      if (account.id === toId) {
+        return { ...account, balance: account.balance + amount };
+      }
+      return account;
+    });
+    
+    accounts.splice(0, accounts.length, ...updatedAccounts);
+    
+    toast.success('Transfer completed successfully');
+  };
+
   const totalBalance = accounts.reduce((sum, account) => sum + account.balance, 0);
   
-  // Group accounts by type
   const checkingAccounts = accounts.filter(account => account.type === 'checking');
   const savingsAccounts = accounts.filter(account => account.type === 'savings');
   const creditAccounts = accounts.filter(account => account.type === 'credit');
   const investmentAccounts = accounts.filter(account => account.type === 'investment');
   
-  // Function to format balance with currency
   const formatBalance = (balance: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
@@ -28,7 +44,6 @@ const Accounts = () => {
     }).format(Math.abs(balance));
   };
   
-  // Function to render account cards
   const renderAccountCards = (accountsList: typeof accounts) => {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -84,7 +99,11 @@ const Accounts = () => {
           <p className="text-muted-foreground">Manage your bank accounts and cards</p>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" className="gap-2">
+          <Button 
+            variant="outline" 
+            className="gap-2"
+            onClick={() => setShowTransferModal(true)}
+          >
             <ArrowRightLeft className="h-4 w-4" />
             <span>Transfer Money</span>
           </Button>
@@ -95,7 +114,6 @@ const Accounts = () => {
         </div>
       </div>
       
-      {/* Account Summary */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         <Card>
           <CardHeader className="pb-2">
@@ -141,7 +159,6 @@ const Accounts = () => {
         </Card>
       </div>
       
-      {/* Accounts Tabs */}
       <Tabs defaultValue="all" className="w-full">
         <TabsList className="mb-6 grid grid-cols-5 w-full max-w-md">
           <TabsTrigger value="all">All</TabsTrigger>
@@ -171,6 +188,13 @@ const Accounts = () => {
           {renderAccountCards(investmentAccounts)}
         </TabsContent>
       </Tabs>
+      
+      <TransferModal
+        isOpen={showTransferModal}
+        onClose={() => setShowTransferModal(false)}
+        accounts={accounts}
+        onTransfer={handleTransfer}
+      />
     </div>
   );
 };

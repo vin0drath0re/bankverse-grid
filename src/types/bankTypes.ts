@@ -20,14 +20,6 @@ export interface Transaction {
   status: 'pending' | 'completed' | 'failed';
 }
 
-export interface BudgetCategory {
-  id: string;
-  name: string;
-  allocated: number;
-  spent: number;
-  color: string;
-}
-
 export interface User {
   id: string;
   name: string;
