@@ -1,18 +1,16 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { 
   LayoutDashboard, 
   CreditCard, 
-  PiggyBank, 
   ArrowRightLeft, 
   BarChart3, 
-  BellRing, 
   Settings, 
   HelpCircle,
   LogOut,
   Menu,
-  TrendingUp
+  TrendingUp,
+  Users
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -53,10 +51,10 @@ const Sidebar = ({ collapsed, toggleSidebar, currentPath }: SidebarProps) => {
   const navItems = [
     { icon: <LayoutDashboard size={20} />, label: 'Dashboard', to: '/' },
     { icon: <CreditCard size={20} />, label: 'Accounts', to: '/accounts' },
+    { icon: <Users size={20} />, label: 'Payees', to: '/payees' },
     { icon: <ArrowRightLeft size={20} />, label: 'Transactions', to: '/transactions' },
     { icon: <TrendingUp size={20} />, label: 'Investments', to: '/investments' },
     { icon: <BarChart3 size={20} />, label: 'Analytics', to: '/analytics' },
-    { icon: <BellRing size={20} />, label: 'Notifications', to: '/notifications' },
   ];
 
   const bottomNavItems = [

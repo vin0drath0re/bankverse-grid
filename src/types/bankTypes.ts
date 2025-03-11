@@ -1,4 +1,3 @@
-
 export interface Account {
   id: string;
   name: string;
@@ -25,6 +24,14 @@ export interface User {
   name: string;
   email: string;
   avatar?: string;
+}
+
+export interface Payee {
+  id: string;
+  name: string;
+  accountNumber: string;
+  ifscCode: string;
+  createdAt: string;
 }
 
 export interface BudgetCategory {
