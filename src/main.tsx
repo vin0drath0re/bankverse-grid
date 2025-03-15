@@ -1,5 +1,7 @@
+
 import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
+import { AppRouter } from 'next/dist/shared/lib/app-router-context.shared-runtime'
+import { Layout } from './app/layout'
 import './index.css'
 
-createRoot(document.getElementById("root")!).render(<App />);
+createRoot(document.getElementById("root")!).render(<Layout />);
