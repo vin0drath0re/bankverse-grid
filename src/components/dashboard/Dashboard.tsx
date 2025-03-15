@@ -1,15 +1,20 @@
 
+"use client";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import BudgetOverview from "@/components/dashboard/BudgetOverview";
 import ActivityFeed from "@/components/dashboard/ActivityFeed";
 import UpcomingPayments from "@/components/dashboard/UpcomingPayments";
 import TransactionsList from "@/components/dashboard/TransactionsList";
 import AccountCard from "@/components/dashboard/AccountCard";
-import { accounts } from "@/data/mockData";
+import { accounts, budgetCategories, recentActivities, transactions, upcomingPayments } from "@/data/mockData";
 import MainLayout from "@/components/layout/MainLayout";
 
 export default function Dashboard() {
   const mainAccounts = accounts.filter((acc) => acc.isMain);
+  const recentTransactions = [...transactions].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  ).slice(0, 5);
 
   return (
     <MainLayout>
@@ -33,7 +38,7 @@ export default function Dashboard() {
               <CardTitle>Budget Overview</CardTitle>
             </CardHeader>
             <CardContent>
-              <BudgetOverview />
+              <BudgetOverview categories={budgetCategories} />
             </CardContent>
           </Card>
 
@@ -42,7 +47,7 @@ export default function Dashboard() {
               <CardTitle>Activity Feed</CardTitle>
             </CardHeader>
             <CardContent>
-              <ActivityFeed />
+              <ActivityFeed activities={recentActivities} />
             </CardContent>
           </Card>
         </div>
@@ -53,7 +58,7 @@ export default function Dashboard() {
               <CardTitle>Recent Transactions</CardTitle>
             </CardHeader>
             <CardContent>
-              <TransactionsList />
+              <TransactionsList transactions={recentTransactions} />
             </CardContent>
           </Card>
 
@@ -62,7 +67,7 @@ export default function Dashboard() {
               <CardTitle>Upcoming Payments</CardTitle>
             </CardHeader>
             <CardContent>
-              <UpcomingPayments />
+              <UpcomingPayments payments={upcomingPayments} />
             </CardContent>
           </Card>
         </div>
