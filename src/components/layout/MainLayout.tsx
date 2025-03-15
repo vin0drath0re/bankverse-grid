@@ -1,8 +1,6 @@
 
-"use client";
-
 import { useState, useEffect } from 'react';
-import { usePathname } from 'next/navigation';
+import { useLocation } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Header from './Header';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -13,7 +11,7 @@ interface MainLayoutProps {
 
 const MainLayout = ({ children }: MainLayoutProps) => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const pathname = usePathname();
+  const location = useLocation();
   const isMobile = useIsMobile();
 
   useEffect(() => {
@@ -31,7 +29,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
       <Sidebar 
         collapsed={sidebarCollapsed} 
         toggleSidebar={toggleSidebar} 
-        currentPath={pathname}
+        currentPath={location.pathname}
       />
       
       <div className="flex-1 flex flex-col h-screen overflow-hidden">
