@@ -1,5 +1,8 @@
+
+"use client";
+
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { 
   LayoutDashboard, 
   CreditCard, 
@@ -19,13 +22,13 @@ import { useIsMobile } from '@/hooks/use-mobile';
 interface NavItemProps {
   icon: React.ReactNode;
   label: string;
-  to: string;
+  href: string;
   active?: boolean;
   onClick?: () => void;
 }
 
-const NavItem = ({ icon, label, to, active, onClick }: NavItemProps) => (
-  <Link to={to} onClick={onClick}>
+const NavItem = ({ icon, label, href, active, onClick }: NavItemProps) => (
+  <Link href={href} onClick={onClick}>
     <Button
       variant="ghost"
       className={cn(
@@ -49,17 +52,17 @@ const Sidebar = ({ collapsed, toggleSidebar, currentPath }: SidebarProps) => {
   const isMobile = useIsMobile();
   
   const navItems = [
-    { icon: <LayoutDashboard size={20} />, label: 'Dashboard', to: '/' },
-    { icon: <CreditCard size={20} />, label: 'Accounts', to: '/accounts' },
-    { icon: <Users size={20} />, label: 'Payees', to: '/payees' },
-    { icon: <ArrowRightLeft size={20} />, label: 'Transactions', to: '/transactions' },
-    { icon: <TrendingUp size={20} />, label: 'Investments', to: '/investments' },
-    { icon: <BarChart3 size={20} />, label: 'Analytics', to: '/analytics' },
+    { icon: <LayoutDashboard size={20} />, label: 'Dashboard', href: '/' },
+    { icon: <CreditCard size={20} />, label: 'Accounts', href: '/accounts' },
+    { icon: <Users size={20} />, label: 'Payees', href: '/payees' },
+    { icon: <ArrowRightLeft size={20} />, label: 'Transactions', href: '/transactions' },
+    { icon: <TrendingUp size={20} />, label: 'Investments', href: '/investments' },
+    { icon: <BarChart3 size={20} />, label: 'Analytics', href: '/analytics' },
   ];
 
   const bottomNavItems = [
-    { icon: <Settings size={20} />, label: 'Settings', to: '/settings' },
-    { icon: <HelpCircle size={20} />, label: 'Help & Support', to: '/help' },
+    { icon: <Settings size={20} />, label: 'Settings', href: '/settings' },
+    { icon: <HelpCircle size={20} />, label: 'Help & Support', href: '/help' },
   ];
 
   if (isMobile && collapsed) {
@@ -89,11 +92,11 @@ const Sidebar = ({ collapsed, toggleSidebar, currentPath }: SidebarProps) => {
       <div className="p-3">
         {navItems.map((item) => (
           <NavItem
-            key={item.to}
+            key={item.href}
             icon={item.icon}
             label={item.label}
-            to={item.to}
-            active={item.to === currentPath}
+            href={item.href}
+            active={item.href === currentPath}
             onClick={isMobile ? toggleSidebar : undefined}
           />
         ))}
@@ -102,11 +105,11 @@ const Sidebar = ({ collapsed, toggleSidebar, currentPath }: SidebarProps) => {
       <div className="absolute bottom-0 left-0 right-0 p-3 border-t">
         {bottomNavItems.map((item) => (
           <NavItem
-            key={item.to}
+            key={item.href}
             icon={item.icon}
             label={item.label}
-            to={item.to}
-            active={item.to === currentPath}
+            href={item.href}
+            active={item.href === currentPath}
             onClick={isMobile ? toggleSidebar : undefined}
           />
         ))}
