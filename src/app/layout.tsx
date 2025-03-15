@@ -6,7 +6,8 @@ import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+// Fix the Inter font import for use in Vite instead of Next.js
+const inter = { className: "font-inter" };
 
 export const metadata: Metadata = {
   title: "BankVerse - Your Banking Dashboard",
